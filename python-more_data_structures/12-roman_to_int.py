@@ -1,13 +1,20 @@
 #!/usr/bin/python3
-def weight_average(my_list=[]):
-    if not my_list:
-        return 0
+def roman_to_int(roman_string):
+    if type(roman_string) == str:
+        sum_v = 0
+        num = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
 
-    num = 0
-    den = 0
+        for i in range(len(roman_string)):
 
-    for tup in my_list:
-        num += tup[0] * tup[1]
-        den += tup[1]
+            if i == len(roman_string) - 1:
+                sum_v += num[roman_string[i]]
 
-    return (num / den)
+            elif num[roman_string[i + 1]] <= num[roman_string[i]]:
+                sum_v += num[roman_string[i]]
+
+            else:
+                sum_v -= num[roman_string[i]]
+
+        return (sum_v)
+    else:
+        return (0)
