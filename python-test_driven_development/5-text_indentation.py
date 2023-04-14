@@ -7,7 +7,7 @@
 def text_indentation(text):
     """ Text indentation function
     Args:
-        text (str): A string of text
+        text (str): A string of characters
     """
 
     if type(text) is not str:
