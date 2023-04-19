@@ -1,25 +1,33 @@
 #!/usr/bin/python3
 """
-Script that lists all cities from the database hbtn_0e_4_usa
+This script lists all `states` from the database
+`hbtn_0e_0_usa` starting with `N`.
 """
 import MySQLdb
-from sys import argv
+import sys
 
-# The code should not be executed when imported
-if __name__ == '__main__':
-    # make a connection to the database
-    db = MySQLdb.connect(host="localhost", port=3306, user=argv[1],
-                         passwd=argv[2], db=argv[3])
 
+def cities_by_states():
+    """
+    lists all states
+    """
+    db = MySQLdb.connect(host="localhost", port=3306, user=sys.argv[1],
+                         passwd=sys.argv[2], db=sys.argv[3])
     cur = db.cursor()
-    cur.execute("SELECT cities.id, cities.name, states.name FROM cities\
-                INNER JOIN states ON cities.state_id = states.id\
-                ORDER BY cities.id ASC")
 
-    rows = cur.fetchall()
-    for i in rows:
-        print(i)
-    # Clean up process
+    cur.execute('SELECT cities.id, cities.name, states.name \
+                FROM cities LEFT JOIN states \
+                  ON cities.state_id = states.id')
+
+    results = cur.fetchall()
+
     cur.close()
     db.close()
+
+    for row in results:
+        print(row)
+
+
+if __name__ == "__main__":
+    cities_by_states()
 
