@@ -1,35 +1,36 @@
 #!/usr/bin/python3
 """
-This script lists all `states` from the database
-`hbtn_0e_0_usa` starting with `N`.
+    A script that lists all cities from the database hbtn_0e_4_usa
 """
-import MySQLdb
+
+
 import sys
-
-
-def cities_by_states():
-    """
-    lists all states
-    """
-    db = MySQLdb.connect(host="localhost", port=3306, user=sys.argv[1],
-                         passwd=sys.argv[2], db=sys.argv[3])
-    cur = db.cursor()
-
-    cur.execute('SELECT cities.id, cities.name, states.name \
-                FROM cities LEFT JOIN states \
-                  ON cities.state_id = states.id')
-
-    results = cur.fetchall()
-
-    cur.close()
-    db.close()
-
-    for row in results:
-        print(row)
+import MySQLdb
 
 
 if __name__ == "__main__":
-    cities_by_states()
+    conn = MySQLdb.connect(
+        user=sys.argv[1],
+        password=sys.argv[2],
+        db=sys.argv[3],
+        host="localhost",
+        port=3306
+    )
+    cursor = conn.cursor()
+
+    sql = """SELECT c.id, c.name, s.name
+          FROM states s, cities c
+          WHERE c.state_id = s.id
+          ORDER BY c.id ASC"""
+
+    cursor.execute(sql)
+    cities = cursor.fetchall()
+
+    for city in cities:
+        print(city)
+
+    cursor.close()
+    conn.close()
 
 
 
