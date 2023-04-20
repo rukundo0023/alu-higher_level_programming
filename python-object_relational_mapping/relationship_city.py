@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Defines class City and list cities
+Defines class City
 """
 
 from sqlalchemy import Column, Integer, String, ForeignKey
