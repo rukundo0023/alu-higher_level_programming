@@ -1,5 +1,5 @@
 #!/usr/bin/node
-const line1 = 'c is fun';
+const line1 = 'C is fun';
 const line2 = 'python is cool';
 const line3 = 'JavaScript is amazing';
 
