@@ -4,4 +4,3 @@ const printArguments = (arg1, arg2) => {
 };
 
 printArguments('Python', 'fun');
-
